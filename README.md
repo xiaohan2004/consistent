@@ -101,3 +101,7 @@ replicas, err := c.GetClosestN([]byte("key"), 2)
 ## 原版仓库地址
 
 [consistent](https://github.com/buraksezer/consistent)
+
+## 为什么不在原版代码基础上封装
+
+`_examples/encapsulation_consistent_failed_example.go` 文件是在原版代码基础上封装的示例，经过测试发现速度上与直接修改源码相比有明显的差距。主要原因是封装的方式实现支持权重，在初始化时，add的次数将会是权重和的倍数，意味着sort也是权重和的倍数，速度太慢了。而重写涉及到的方法，实际上和直接修改源码没太大区别了。
